@@ -19,7 +19,8 @@ public class ResourceServerConfiguration extends ResourceServerConfigurerAdapter
 
     private static final String[] AUTH_WHITELIST = {
             "/v1/mytel/send",
-            "/v1/smspoh/send"
+            "/v1/smspoh/send",
+            "/v1/twilio/send"
     };
 
     @Value("${security.oauth2.resource.id}")

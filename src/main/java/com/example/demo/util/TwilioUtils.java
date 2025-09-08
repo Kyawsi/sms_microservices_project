@@ -20,8 +20,8 @@ public final class TwilioUtils {
         return url;
     }
 
-    public static String buildBasicAuth(String accountSid, String authToken) {
-        String credentials = accountSid + ":" + authToken;
+    public static String buildBasicAuth(String apiKey, String apiSecret) {
+        String credentials = apiKey + ":" + apiSecret;
         return "Basic " + Base64.getEncoder()
                 .encodeToString(credentials.getBytes(StandardCharsets.UTF_8));
     }

@@ -39,8 +39,7 @@ public class TwilioServiceImpl implements TwilioService {
             MultiValueMap<String, String> formData = new LinkedMultiValueMap<>();
             formData.add("To", to);
             formData.add("From", TWILIO_SENDER_ID);
-            formData.add("Body", body);
-
+            formData.add("Body", "WeDay : " + body);
             log.info("Sending SMS to {} via Twilio...", to);
 
             return webClientBuilder.build()
