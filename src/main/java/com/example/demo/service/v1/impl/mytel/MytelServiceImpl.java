@@ -25,40 +25,40 @@ public class MytelServiceImpl implements MytelService {
     @Autowired
     private HttpUtils httpUtils;
 
-    @Override
-    public ResponseFormat getLoginToken() {
-        log.info("[getLoginToken] Calling MytelUtil...");
-
-        MytelTokenWrapper wrapper = mytelUtil.getMytelToken();
-
-        if (wrapper == null || wrapper.getResult() == null) {
-            throw new SystemException("Empty response from Mytel API");
-        }
-
-        MytelTokenResponse result = wrapper.getResult();
-
-        log.info("[getLoginToken] Mytel response result:");
-        log.info("  -> accessToken      = {}", result.getAccessToken());
-        log.info("  -> expireInSeconds  = {}", result.getExpireInSeconds());
-        log.info("  -> isError          = {}", result.isError());
-        log.info("  -> message          = {}", result.getMessage());
-
-        if (result.isError()) {
-            throw new SystemException("Mytel login failed: " + result.getMessage());
-        }
-
-        if (result.getAccessToken() == null || result.getAccessToken().isEmpty()) {
-            throw new SystemException("Access token is missing");
-        }
-
-        log.info("[getLoginToken] Token fetched successfully");
-
-        ResponseFormat responseFormat = new ResponseFormat();
-        responseFormat.setSuccess(true);
-        responseFormat.setMessage(Optional.of("Generate Token Successful"));
-        responseFormat.setData(Optional.of(result));
-        return responseFormat;
-    }
+//    @Override
+//    public ResponseFormat getLoginToken() {
+//        log.info("[getLoginToken] Calling MytelUtil...");
+//
+//        MytelTokenWrapper wrapper = mytelUtil.getMytelToken();
+//
+//        if (wrapper == null || wrapper.getResult() == null) {
+//            throw new SystemException("Empty response from Mytel API");
+//        }
+//
+//        MytelTokenResponse result = wrapper.getResult();
+//
+//        log.info("[getLoginToken] Mytel response result:");
+//        log.info("  -> accessToken      = {}", result.getAccessToken());
+//        log.info("  -> expireInSeconds  = {}", result.getExpireInSeconds());
+//        log.info("  -> isError          = {}", result.isError());
+//        log.info("  -> message          = {}", result.getMessage());
+//
+//        if (result.isError()) {
+//            throw new SystemException("Mytel login failed: " + result.getMessage());
+//        }
+//
+//        if (result.getAccessToken() == null || result.getAccessToken().isEmpty()) {
+//            throw new SystemException("Access token is missing");
+//        }
+//
+//        log.info("[getLoginToken] Token fetched successfully");
+//
+//        ResponseFormat responseFormat = new ResponseFormat();
+//        responseFormat.setSuccess(true);
+//        responseFormat.setMessage(Optional.of("Generate Token Successful"));
+//        responseFormat.setData(Optional.of(result));
+//        return responseFormat;
+//    }
 
 
     @Override

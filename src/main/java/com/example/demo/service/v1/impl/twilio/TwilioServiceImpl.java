@@ -31,7 +31,7 @@ public class TwilioServiceImpl implements TwilioService {
     private String password;
 
     @Override
-    public TwilioSmsResponse sendSms(String to, String from, String body) {
+    public TwilioSmsResponse sendSms(String to, String body) {
         try {
             String url = TwilioUtils.buildSendSmsUrl(username);
             String basicAuth = TwilioUtils.buildBasicAuth(username, password);
@@ -53,10 +53,10 @@ public class TwilioServiceImpl implements TwilioService {
                     .block();
         } catch (WebClientResponseException e) {
             log.error("Twilio API error: {}", e.getResponseBodyAsString());
-            throw new RuntimeException("Twilio Error: " + e.getResponseBodyAsString(), e);
+            throw e;
         } catch (Exception e) {
             log.error("Unexpected Twilio error", e);
-            throw new RuntimeException("Unexpected Twilio Error: " + e.getMessage(), e);
+            throw e;
         }
     }
 }

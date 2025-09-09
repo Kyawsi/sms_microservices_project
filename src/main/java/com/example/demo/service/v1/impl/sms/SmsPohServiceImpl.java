@@ -68,10 +68,7 @@ public class SmsPohServiceImpl implements SmsPohService {
         try {
             request.setFrom(sender);
             log.info("Sending SMS via SMSPoh V3: {}", new ObjectMapper().writeValueAsString(request)); // log request
-//            return accessSMSPohV3(request).doOnNext(res ->
-//                    log.info("SMSPoh V3 Response: {}", res)
-//            ).block();
-            // Call SMSPoh but ignore upstream null response
+
             accessSMSPohV3(request)
                     .doOnNext(res -> {
                         try {
@@ -101,10 +98,6 @@ public class SmsPohServiceImpl implements SmsPohService {
 
 
     private Mono<SMSSendingResponse> accessSMSPohV3(SMSSendingRequestV3 request) {
-
-//        String credentials = smsUsername + ":" + smsPassword;
-//        String basicAuth = "Basic " + Base64.getEncoder()
-//                .encodeToString(credentials.getBytes(StandardCharsets.UTF_8));
 
         return webClient.post()
                 .uri(SEND_SMS_URI_V3)
